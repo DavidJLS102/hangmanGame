@@ -11,12 +11,14 @@ public class Main extends javax.swing.JFrame {
     public int selectedWord;
     public int attempts;
     public String guessedLetters[];
-
+    public boolean player1Turn;
+   
     public Main() {
         initComponents();
         btns = new JButton[27];
         words = new String[5];
-
+        
+        
         btns[1] = jButton2;
         btns[2] = jButton3;
         btns[3] = jButton4;
@@ -49,7 +51,9 @@ public class Main extends javax.swing.JFrame {
         words[2] = "Universidad".toUpperCase();
         words[3] = "Futbol".toUpperCase();
         words[4] = "Hola".toUpperCase();
-        words[5] = "Lapiz".toUpperCase();
+        
+        player1Turn = true; // Comienza el jugador 1
+        jLabel2.setText("Turn: Player 1");
    
         //se asigna un evento a cada letra para comprobar que exista en la palabra a adivinar
         for (int i = 1; i < 27; i++) {
@@ -62,21 +66,27 @@ public class Main extends javax.swing.JFrame {
         iniciar();
     }
 
+    
     //funcion para comenzar los parametros del juego o iniciar una nueva partida
     public void iniciar() {
         //ERRORES EN 0
-        attempts= 0;
+        attempts= 6;
         jTextPane1.setText("");
+        jLabel1.setText(("Attempts Left: 6"));
+        
+        
         //para activar las letras del tablero
         for (int i = 1; i < 27; i++) {
             btns[i].setEnabled(true);
         }
+        
         //para generar una palabra aleatoriamente xD
         selectedWord = (int) 0 + (int) (Math.random() * ((words.length - 1) + 1));
         //SEPARA EL MENSAJE POR PALABRAS
         String pal[] = words[selectedWord].split(" ");
         guessedLetters = new String[words[selectedWord].length() + 1];
         int j = 0;
+        
         // seran los guiones que van debajo de las letras como una separacion_
         for (String pal1 : pal) {
             for (int i = 0; i < pal1.length(); i++) {
@@ -92,6 +102,7 @@ public class Main extends javax.swing.JFrame {
     public void checarLetra(ActionEvent e) {
         JButton bt = (JButton) e.getSource();
         char c[];
+        
         //busca la letra en la palabra despues de haber sido presionada
         for (int i = 1; i < 27; i++) {
             if (bt == btns[i]) {
@@ -99,12 +110,14 @@ public class Main extends javax.swing.JFrame {
                 c = Character.toChars(64 + i);
                 //busca si la letra esta en la frase
                 boolean esta = false;
+                
                 for (int j = 0; j < words[selectedWord].length(); j++) {
-                    if (c[0] == words[selectedWord].charAt(j)) {
+                      if (c[0] == words[selectedWord].charAt(j)) {
                         guessedLetters[j] = c[0] + "";
                         esta = true;
                     }
                 }
+                
                 //SI LA LETRA ESTA EN EL MENSAJE SE MUESTRA EN EL TEXTPANEL
                 if (esta) {
                     jTextPane1.setText("");
@@ -115,6 +128,7 @@ public class Main extends javax.swing.JFrame {
                             jTextPane1.setText(jTextPane1.getText() + re + " ");
                         }
                     }
+                    
                     //hace una comprobacion de las letras restantes y faltantes, en caso de que ya no haya letras sera ganador :D
                     boolean gano = true;
                     for (String re : guessedLetters) {
@@ -123,31 +137,46 @@ public class Main extends javax.swing.JFrame {
                             break;
                         }
                     }
+                    
                     //al ser correcta se muestra un mensaje y se reinicia el juego
                     if (gano) {
                         JOptionPane.showMessageDialog(this, "You Win!");
                         iniciar();
                         return;
                     }
+                    
+                    
                     //SI LA LETRA NO ESTA EN EL MENSAGE, SE INCREMENTA EL ERROR Y SE CAMBIA LA IMAGEN
                 } else {
-                    attempts++;
+                    attempts--;
+                    jLabel1.setText("Attempts Left: "+attempts);
+                    
                     //SI SE LLEGA A LOS 5 ERRORES ENTONCES SE PIERDE EL JUEGO Y SE MANDA EL MENSAGE DE:
-                    if (attempts == 5) {
+                    if (attempts == 0) {
                         JOptionPane.showMessageDialog(this, "You lost, the word was: \n" + words[selectedWord]);
                         iniciar();
+                       cambiarTurno();
                         return;
                     }
                 }
-                //esta es la linea que desactiva las letras despues de ser usadas :3
+                
                 bt.setEnabled(false);
+    
                 break;
             }
         }
 
     }
 
-
+ private void cambiarTurno() {
+        player1Turn = !player1Turn;
+        if (player1Turn) {
+            jLabel2.setText("Turn: Player 1");
+        } else {
+            jLabel2.setText("Turn: Player 2");
+        }
+    }
+ 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -182,6 +211,8 @@ public class Main extends javax.swing.JFrame {
         jButton27 = new javax.swing.JButton();
         jButton28 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hanged Game");
@@ -281,6 +312,10 @@ public class Main extends javax.swing.JFrame {
 
         jLabel3.setText(" ");
 
+        jLabel1.setText("jLabel1");
+
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -352,6 +387,12 @@ public class Main extends javax.swing.JFrame {
                                 .addGap(35, 35, 35)
                                 .addComponent(jLabel3)))))
                 .addGap(0, 91, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,7 +439,11 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jButton26)
                             .addComponent(jButton27)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(30, 30, 30)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -486,6 +531,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
