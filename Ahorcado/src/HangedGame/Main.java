@@ -14,7 +14,10 @@ public class Main extends javax.swing.JFrame {
     public int attempts;
     public String guessedLetters[];
     public boolean player1Turn;
-   
+    
+    private int player1Score = 0;
+    private int player2Score = 0;
+
     public Main() {
         initComponents();
         btns = new JButton[27];
@@ -56,10 +59,10 @@ public class Main extends javax.swing.JFrame {
         imgs[5] = new ImageIcon(getClass().getResource("/HangedGame/sources/6.jpg"));
         imgs[6] = new ImageIcon(getClass().getResource("/HangedGame/sources/7.jpg"));
 
-        words[0] = "Enner".toUpperCase();
-        words[1] = "Carlos".toUpperCase();
-        words[2] = "Universidad".toUpperCase();
-        words[3] = "Futbol".toUpperCase();
+        words[0] = "hola".toUpperCase();
+        words[1] = "hola".toUpperCase();
+        words[2] = "hola".toUpperCase();
+        words[3] = "hola".toUpperCase();
         words[4] = "Hola".toUpperCase();
         
         player1Turn = true; // Comienza el jugador 1
@@ -151,7 +154,12 @@ public class Main extends javax.swing.JFrame {
                     
                     //al ser correcta se muestra un mensaje y se reinicia el juego
                     if (gano) {
-                        JOptionPane.showMessageDialog(this, "You Win!");
+                         if (player1Turn) {
+                            player1Score += 100;
+                        } else {
+                            player2Score += 100;
+                        }
+                         JOptionPane.showMessageDialog(this, "You Win!");
                         iniciar();
                         return;
                     }
@@ -189,6 +197,14 @@ public class Main extends javax.swing.JFrame {
         }
     }
  
+ public void resetScores() {
+    player1Score = 0;
+    player2Score = 0;
+}
+ 
+ public void updateFrame2Scores(Frame2 frame2) {
+    frame2.updateScores(player1Score, player2Score);
+}
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -226,6 +242,7 @@ public class Main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton29 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hanged Game");
@@ -336,6 +353,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton29.setText("puntuacion");
+        jButton29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton29ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -408,19 +432,22 @@ public class Main extends javax.swing.JFrame {
                                 .addGap(37, 37, 37)
                                 .addComponent(jLabel3))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(192, 192, 192)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(79, 79, 79)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jButton23)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton24)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton25)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton24)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton25)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jButton26)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton27)))))))
+                                        .addComponent(jButton27))
+                                    .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 106, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -434,14 +461,14 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addComponent(jLabel3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton4)
                             .addComponent(jButton2)
@@ -459,7 +486,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jButton13)
                             .addComponent(jButton14)
                             .addComponent(jButton15))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton16)
                     .addComponent(jButton17)
@@ -476,8 +503,10 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jButton26)
                     .addComponent(jButton27))
                 .addGap(18, 18, 18)
-                .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -501,12 +530,20 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
-        iniciar();        // TODO add your handling code here:
+        iniciar();   
+         resetScores();
     }//GEN-LAST:event_jButton28ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
+      Frame2 frame2 = new Frame2(this);
+    updateFrame2Scores(frame2);  // Usa el nuevo método
+    frame2.setVisible(true);
+    this.setVisible(false);
+    }//GEN-LAST:event_jButton29ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -542,6 +579,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton28;
+    private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
