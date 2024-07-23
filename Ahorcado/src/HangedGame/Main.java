@@ -6,205 +6,159 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+
 public class Main extends javax.swing.JFrame {
-    public ImageIcon imgs[];
-    public JButton btns[];
-    public String words[];
-    public int selectedWord;
-    public int attempts;
-    public String guessedLetters[];
-    public boolean player1Turn;
-    
+    private HangedGameResources gameResources;
+    private HangedGameLogic gameLogic;  
     private int player1Score = 0;
     private int player2Score = 0;
 
     public Main() {
         initComponents();
-        btns = new JButton[27];
-        words = new String[5];
-        imgs = new ImageIcon[7];
-        
-        btns[1] = jButton2;
-        btns[2] = jButton3;
-        btns[3] = jButton4;
-        btns[4] = jButton5;
-        btns[5] = jButton6;
-        btns[6] = jButton7;
-        btns[7] = jButton8;
-        btns[8] = jButton9;
-        btns[9] = jButton10;
-        btns[10] = jButton11;
-        btns[11] = jButton12;
-        btns[12] = jButton13;
-        btns[13] = jButton14;
-        btns[14] = jButton15;
-        btns[15] = jButton16;
-        btns[16] = jButton17;
-        btns[17] = jButton18;
-        btns[18] = jButton19;
-        btns[19] = jButton20;
-        btns[20] = jButton21;
-        btns[21] = jButton22;
-        btns[22] = jButton23;
-        btns[23] = jButton24;
-        btns[24] = jButton25;
-        btns[25] = jButton26;
-        btns[26] = jButton27;
-        
-        imgs[0] = new ImageIcon(getClass().getResource("/HangedGame/sources/1.jpg"));
-        imgs[1] = new ImageIcon(getClass().getResource("/HangedGame/sources/2.jpg"));
-        imgs[2] = new ImageIcon(getClass().getResource("/HangedGame/sources/3.jpg"));
-        imgs[3] = new ImageIcon(getClass().getResource("/HangedGame/sources/4.jpg"));
-        imgs[4] = new ImageIcon(getClass().getResource("/HangedGame/sources/5.jpg"));
-        imgs[5] = new ImageIcon(getClass().getResource("/HangedGame/sources/6.jpg"));
-        imgs[6] = new ImageIcon(getClass().getResource("/HangedGame/sources/7.jpg"));
-
-        words[0] = "hola".toUpperCase();
-        words[1] = "hola".toUpperCase();
-        words[2] = "hola".toUpperCase();
-        words[3] = "hola".toUpperCase();
-        words[4] = "Hola".toUpperCase();
-        
-        player1Turn = true; // Comienza el jugador 1
-        jLabel2.setText("Turn: Player 1");
-   
-        //se asigna un evento a cada letra para comprobar que exista en la palabra a adivinar
-        for (int i = 1; i < 27; i++) {
-            btns[i].addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    checarLetra(e);
-                }
-            });
-        }
-        iniciar();
+        gameResources = new HangedGameResources();
+        gameLogic = new HangedGameLogic(gameResources.getWords());
+        gameLogic.initializeGame(); // Inicializamos el juego
+        initializeButtons();
+        updateDisplay();
+        updateAttemptsLabel();
     }
-
-    
-    //funcion para comenzar los parametros del juego o iniciar una nueva partida
-    public void iniciar() {
-        //ERRORES EN 0
-        attempts= 6;
-        jTextPane1.setText("");
-        jLabel1.setText(("Attempts Left: 6"));
-        jButton1.setIcon(imgs[6]);
         
+    private void initializeButtons() {
+        JButton[] buttons = gameResources.getButtons();
+        buttons[1] = jButton2;
+        buttons[2] = jButton3;
+        buttons[3] = jButton4;
+        buttons[4] = jButton5;
+        buttons[5] = jButton6;
+        buttons[6] = jButton7;
+        buttons[7] = jButton8;
+        buttons[8] = jButton9;
+        buttons[9] = jButton10;
+        buttons[10] = jButton11;
+        buttons[11] = jButton12;
+        buttons[12] = jButton13;
+        buttons[13] = jButton14;
+        buttons[14] = jButton15;
+        buttons[15] = jButton16;
+        buttons[16] = jButton17;
+        buttons[17] = jButton18;
+        buttons[18] = jButton19;
+        buttons[19] = jButton20;
+        buttons[20] = jButton21;
+        buttons[21] = jButton22;
+        buttons[22] = jButton23;
+        buttons[23] = jButton24;
+        buttons[24] = jButton25;
+        buttons[25] = jButton26;
+        buttons[26] = jButton27;
         
-        //para activar las letras del tablero
-        for (int i = 1; i < 27; i++) {
-            btns[i].setEnabled(true);
-        }
-        
-        //para generar una palabra aleatoriamente xD
-        selectedWord = (int) 0 + (int) (Math.random() * ((words.length - 1) + 1));
-        //SEPARA EL MENSAJE POR PALABRAS
-        String pal[] = words[selectedWord].split(" ");
-        guessedLetters = new String[words[selectedWord].length() + 1];
-        int j = 0;
-        
-        // seran los guiones que van debajo de las letras como una separacion_
-        for (String pal1 : pal) {
-            for (int i = 0; i < pal1.length(); i++) {
-                jTextPane1.setText(jTextPane1.getText() + "_ ");
-                guessedLetters[j++] = "_";
+        for (int i = 1; i < buttons.length; i++) {
+            final int index = i;
+        buttons[i].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                letterButtonClicked((char)('A' + index - 1));
             }
-            jTextPane1.setText(jTextPane1.getText() + "\n");
-           guessedLetters[j++] = " ";
-        }
+        });
+      }
     }
 
-    //al presionar una letra, esta se buscara si pertenece a la palabra, de lo contrario la marcara como error 
-    public void checarLetra(ActionEvent e) {
-        JButton bt = (JButton) e.getSource();
-        char c[];
-        
-        //busca la letra en la palabra despues de haber sido presionada
-        for (int i = 1; i < 27; i++) {
-            if (bt == btns[i]) {
-                //la tecla es inicializada
-                c = Character.toChars(64 + i);
-                //busca si la letra esta en la frase
-                boolean esta = false;
-                
-                for (int j = 0; j < words[selectedWord].length(); j++) {
-                      if (c[0] == words[selectedWord].charAt(j)) {
-                        guessedLetters[j] = c[0] + "";
-                        esta = true;
-                    }
-                }
-                
-                //SI LA LETRA ESTA EN EL MENSAJE SE MUESTRA EN EL TEXTPANEL
-                if (esta) {
-                    jTextPane1.setText("");
-                    for (String re : guessedLetters) {
-                        if (" ".equals(re)) {
-                            jTextPane1.setText(jTextPane1.getText() + "\n");
-                        } else {
-                            jTextPane1.setText(jTextPane1.getText() + re + " ");
-                        }
-                    }
-                    
-                    //hace una comprobacion de las letras restantes y faltantes, en caso de que ya no haya letras sera ganador :D
-                    boolean gano = true;
-                    for (String re : guessedLetters) {
-                        if (re.equals("_")) {
-                            gano = false;
-                            break;
-                        }
-                    }
-                    
-                    //al ser correcta se muestra un mensaje y se reinicia el juego
-                    if (gano) {
-                         if (player1Turn) {
-                            player1Score += 100;
-                        } else {
-                            player2Score += 100;
-                        }
-                         JOptionPane.showMessageDialog(this, "You Win!");
-                        iniciar();
-                        return;
-                    }
-                    
-                    
-                    //SI LA LETRA NO ESTA EN EL MENSAGE, SE INCREMENTA EL ERROR Y SE CAMBIA LA IMAGEN
-                } else {
-                    jButton1.setIcon(imgs[--attempts]);
-                    jLabel1.setText("Attempts Left: "+attempts);
-                    
-                    
-                    //SI SE LLEGA A LOS 5 ERRORES ENTONCES SE PIERDE EL JUEGO Y SE MANDA EL MENSAGE DE:
-                    if (attempts == 0) {
-                        JOptionPane.showMessageDialog(this, "You lost, the word was: \n" + words[selectedWord]);
-                        iniciar();
-                       cambiarTurno();
-                        return;
-                    }
-                }
-                
-                bt.setEnabled(false);
+     private void letterButtonClicked(char letter) {
+        boolean correctGuess = gameLogic.guessLetter(letter);
+    if (correctGuess) {
+        updateWordDisplay();
+    } else {
+        updateHangmanImage();
+    }
     
-                break;
+    updateAttemptsLabel(); 
+    
+    if (gameLogic.isGameOver()) {
+        if (gameLogic.isWordGuessed()) {
+            JOptionPane.showMessageDialog(this, "¡Ganaste! La palabra era: " + gameLogic.getCurrentWord());
+            if (gameLogic.isPlayer1Turn()) {
+                player1Score += 100;
+            } else {
+                player2Score += 100;
             }
-        }
-
-    }
-
- private void cambiarTurno() {
-        player1Turn = !player1Turn;
-        if (player1Turn) {
-            jLabel2.setText("Turn: Player 1");
+            gameLogic.startNewGame(); // Iniciamos un nuevo juego sin cambiar el turno
         } else {
-            jLabel2.setText("Turn: Player 2");
+            JOptionPane.showMessageDialog(this, "¡Se acabaron los intentos! La palabra era: " + gameLogic.getCurrentWord());
+            gameLogic.switchTurn(); // Cambiamos el turno solo si se agotaron los intentos
+            gameLogic.startNewGame(); // Iniciamos un nuevo juego
         }
     }
+    
+    updateTurnDisplay();
+    updateButtonStates();
+    updateDisplay();
+    }
+
+     
+    private void updateDisplay() {
+        updateWordDisplay();
+        updateHangmanImage();
+        updateTurnDisplay();
+        updateButtonStates();
+    }
+    
+    private void updateWordDisplay() {
+        StringBuilder display = new StringBuilder();
+        for (char c : gameLogic.getCurrentWord().toCharArray()) {
+            if (gameLogic.getGuessedLetters()[c - 'A']) {
+                display.append(c);
+            } else {
+                display.append("_");
+            }
+            display.append(" ");
+        }
+        jTextPane1.setText(display.toString());
+    }
+   
+    private void updateHangmanImage() {
+        jButton1.setIcon(gameResources.getImages()[6 - gameLogic.getAttempts()]);
+    }
+
+    private void updateTurnDisplay() {
+        jLabel2.setText("Turn: " + (gameLogic.isPlayer1Turn() ? "Player 1" : "Player 2"));
+    }
+    private void updateAttemptsLabel() {
+    jLabel1.setText("Attempts: " + gameLogic.getAttempts());
+    }
+
+    private void updateButtonStates() {
+        JButton[] buttons = gameResources.getButtons();
+        boolean[] guessedLetters = gameLogic.getGuessedLetters();
+        for (int i = 1; i < buttons.length; i++) {
+            buttons[i].setEnabled(!guessedLetters[i - 1]);
+        }
+    }
+    
+    private void checkGameStatus() {
+         if (gameLogic.isGameOver()) {
+        if (gameLogic.isWordGuessed()) {
+            JOptionPane.showMessageDialog(this, "¡Ganaste! La palabra era: " + gameLogic.getCurrentWord());
+            if (gameLogic.isPlayer1Turn()) {
+                player1Score += 100;
+            } else {
+                player2Score += 100;
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "¡Perdiste tu turno! La palabra era: " + gameLogic.getCurrentWord());
+        }
+        gameLogic.startNewGame();
+        updateDisplay();
+    }
+    }
+
+    public void resetScores() {
+        player1Score = 0;
+        player2Score = 0;
+    }
  
- public void resetScores() {
-    player1Score = 0;
-    player2Score = 0;
-}
- 
- public void updateFrame2Scores(Frame2 frame2) {
-    frame2.updateScores(player1Score, player2Score);
-}
+    public void updateFrame2Scores(Frame2 frame2) {
+        frame2.updateScores(player1Score, player2Score);
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -530,26 +484,23 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
-        iniciar();   
-         resetScores();
+        gameLogic.startNewGame();
+        updateDisplay();
+        resetScores();
+        updateAttemptsLabel();
     }//GEN-LAST:event_jButton28ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
-      Frame2 frame2 = new Frame2(this);
-    updateFrame2Scores(frame2);  // Usa el nuevo método
-    frame2.setVisible(true);
-    this.setVisible(false);
+        Frame2 frame2 = Frame2.createInstance(this);
+        updateFrame2Scores(frame2);
+        frame2.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton29ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main().setVisible(true);
