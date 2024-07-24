@@ -25,3 +25,11 @@ Our project is a hangman game that has 3 frames:
 * Each player has 6 attempts to guess the word
 * When the attempts run out, a message appears indicating that you have exhausted your attempts and give way to the other player.
 * For each word guessed, the player continues playing until he or she loses. Each word is worth 100 points to the player and is shown in the scores menu.
+  
+# Tabla con Alineación
+
+| Columna Izquierda | Columna Centrada | Columna Derecha |
+|:------------------|:----------------:|----------------:|
+| Izquierda 1       |   Centro 1       |       Derecha 1 |
+| Izquierda 2       |   Centro 2       |       Derecha 2 |
+| Izquierda 3       |   Centro 3       |       Derecha 3 |
