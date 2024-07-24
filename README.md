@@ -1,4 +1,4 @@
-# ![University Logo](https://github.com/DavidJLS102/hangmanGame/blob/experiment/interface/logoU.jpeg) HangMan Game
+# HangMan Game
 Members: David López & Paul Cumbal
 
 # Technologies Used
