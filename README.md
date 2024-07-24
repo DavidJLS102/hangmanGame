@@ -18,3 +18,10 @@ Our project is a hangman game that has 3 frames:
 ![image](https://github.com/DavidJLS102/hangmanGame/blob/experiment/interface/Captura%20de%20pantalla%202024-07-23%20225237.png)
 # Frame2:
 ![image](https://github.com/DavidJLS102/hangmanGame/blob/experiment/interface/Captura%20de%20pantalla%202024-07-23%20225258.png)
+
+# Usage 
+*Press Play in the first menu
+*In the second menu, start pressing the buttons according to the key and the letter you want to test.
+*Each player has 6 attempts to guess the word
+*When the attempts run out, a message appears indicating that you have exhausted your attempts and give way to the other player.
+*For each word guessed, the player continues playing until he or she loses. Each word is worth 100 points to the player and is shown in the scores menu.
