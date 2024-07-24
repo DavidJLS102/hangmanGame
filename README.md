@@ -31,7 +31,7 @@ Our project is a hangman game that has 3 frames:
   
 # Functional and non-functional requirements 
 
-| Functional Requirements | Non-functional requirements| 
+| Functional Requirements |Non-functional requirements| 
 |:------------------|:----------------:|
 | Start a new game.- The game must be able to start a new game with a randomly selected word       | Performance.- The game must respond quickly to user actions     |
 | Guess letters.- The program must check if the guessed letter is in the word       |   Usability.- The game interface must be intuitive and easy to use       |   
