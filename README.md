@@ -14,9 +14,9 @@ Our project is a hangman game that has 3 frames:
 
 ## Frame1:
 ![image](https://github.com/DavidJLS102/hangmanGame/blob/experiment/interface/Captura%20de%20pantalla%202024-07-23%20225108.png)
-# Main:
+## Main:
 ![image](https://github.com/DavidJLS102/hangmanGame/blob/experiment/interface/Captura%20de%20pantalla%202024-07-23%20225237.png)
-# Frame2:
+## Frame2:
 ![image](https://github.com/DavidJLS102/hangmanGame/blob/experiment/interface/Captura%20de%20pantalla%202024-07-23%20225258.png)
 
 # Usage 
