@@ -34,7 +34,7 @@ Our project is a hangman game that has 3 frames:
 | Functional Requirements | Non-functional requirements| 
 |:------------------|:----------------:|
 | Start a new game.- The game must be able to start a new game with a randomly selected word       | Performance.- The game must respond quickly to user actions     |
-| Guess letters.- The program must check if the guessed letter is in the word       |   Usability:       |   
-| Player turn change.- The game must allow players to change turns      |   Maintainability:       |   
-| Check end of game.- Check if you have finished, either because the word was guessed or because the attempts were exhausted.    |   Portability:     |    
+| Guess letters.- The program must check if the guessed letter is in the word       |   Usability.- The game interface must be intuitive and easy to use       |   
+| Player turn change.- The game must allow players to change turns      |   Maintainability.- The code must be structured and commented appropriately to facilitate future modifications       |   
+| Check end of game.- Check if you have finished, either because the word was guessed or because the attempts were exhausted.    |   Portability.- The game should be executable on different computers as long as you have the appropriate environment to run Java applications.   |    
  
