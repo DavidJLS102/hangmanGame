@@ -6,8 +6,8 @@ Members: David López & Paul Cumbal
 * JDK version: JDK17
 * IDE: Netbeans 22
 
-# The file path is in: HangmanGameFinal/dist/HangedGame.jar
-* Or you can download the zip from the main branch and run the .exe directly
+## The file path is in: HangmanGameFinal/dist/HangedGame.jar
+* Or you can download the .zip in the code and download zip tab from the main branch and run the .exe directly
 
 > [!NOTE]
 > To run the program you must install JDK version 17 or higher.
