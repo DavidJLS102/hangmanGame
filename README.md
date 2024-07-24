@@ -33,7 +33,7 @@ Our project is a hangman game that has 3 frames:
 
 | Functional Requirements | Non-functional requirements| 
 |:------------------|:----------------:|
-| Start a new game       |   Performance      |
+| Start a new game.- El juego debe poder iniciar una nueva partida con una palabra seleccionada al azar de una lista predefinida.       |   Performance      |
 | Guess letters       |   Usability:       |   
 | Player turn change      |   Maintainability:       |   
 | Check end of game    |   Portability:     |    
