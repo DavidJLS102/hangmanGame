@@ -39,5 +39,5 @@ Our project is a hangman game that has 3 frames:
 | *Check end of game*.- Check if you have finished, either because the word was guessed or because the attempts were exhausted. | *Portability*.- The game should be executable on different computers as long as you have the appropriate environment to run Java applications. | 
 
 > [!TIP]
-> [To run the program you must install the JDK 17 version. ](https://www.oracle.com/java/technologies/downloads/)
+> [To run the program you must install the JDK 17 version. ] https://www.oracle.com/java/technologies/downloads/
  
