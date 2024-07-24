@@ -18,9 +18,9 @@ Our project is a hangman game that has 3 frames:
 ## Frame1:
 ![image](https://github.com/DavidJLS102/hangmanGame/blob/experiment/interface/Frame1.png)
 ## Main:
-![image](https://github.com/DavidJLS102/hangmanGame/blob/experiment/interface/Captura%20de%20pantalla%202024-07-23%20225237.png)
+![image](https://github.com/DavidJLS102/hangmanGame/blob/experiment/interface/Main.png)
 ## Frame2:
-![image](https://github.com/DavidJLS102/hangmanGame/blob/experiment/interface/Captura%20de%20pantalla%202024-07-23%20225258.png)
+![image](https://github.com/DavidJLS102/hangmanGame/blob/experiment/interface/Frame2.png)
 
 # Usage 
 * Press Play in the first menu
