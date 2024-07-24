@@ -33,8 +33,8 @@ Our project is a hangman game that has 3 frames:
 
 | Functional Requirements | Non-functional requirements| 
 |:------------------|:----------------:|
-| 1. Start a new game       |   1. Performance      |
-| 2. Guess letters       |   Centro 2       |   
-| 3. Player turn change      |   Centro 3       |   
-| 3. Check end of game    |   Centro 3       |    
-| 3. Game status      |   Centro 3       |    
+| Start a new game       |   Performance      |
+| Guess letters       |   Usability:       |   
+| Player turn change      |   Maintainability:       |   
+| Check end of game    |   Portability:     |    
+ 
