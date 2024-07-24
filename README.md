@@ -37,4 +37,7 @@ Our project is a hangman game that has 3 frames:
 | *Guess letters*.- The program must check if the guessed letter is in the word | *Usability*.- The game interface must be intuitive and easy to use |
 | *Player turn change*.- The game must allow players to change turns | *Maintainability*.- The code must be structured and commented appropriately to facilitate future modifications |
 | *Check end of game*.- Check if you have finished, either because the word was guessed or because the attempts were exhausted. | *Portability*.- The game should be executable on different computers as long as you have the appropriate environment to run Java applications. | 
+
+> [!TIP]
+> To run the program you must install the JDK 17 version. 
  
