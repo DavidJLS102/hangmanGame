@@ -13,7 +13,7 @@ Our project is a hangman game that has 3 frames:
 3. The third frame is a score table for players 1 and 1, it has a button to return to the game, that is, to the Main (Image 3).
 
 # Frame1:
-![image]([https://github.com/paulcc18/PythonProgram/assets/170490551/858dec61-f77e-4e14-bdbf-b5a904968913](https://github.com/DavidJLS102/hangmanGame/blob/experiment/interface/Captura%20de%20pantalla%202024-07-23%20225108.png))
+![image]([https://github.com/paulcc18/PythonProgram/assets/170490551/858dec61-f77e-4e14-bdbf-b5a904968913])
 # Main:
 ![image]([https://github.com/paulcc18/PythonProgram/assets/170490551/04c98c9d-44c9-42f8-8fec-e4c8dcb3fbdc](https://github.com/DavidJLS102/hangmanGame/blob/experiment/interface/Captura%20de%20pantalla%202024-07-23%20225237.png))
 # Frame2:
