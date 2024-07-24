@@ -7,7 +7,7 @@ Members: David López & Paul Cumbal
 * IDE: Netbeans 22
 
 > [!NOTE]
-> To run the program you must install the JDK 17 version. 
+> To run the program you must install JDK version 17 or higher.
 
 # Description
 Our project is a hangman game that has 3 frames:
