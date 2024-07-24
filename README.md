@@ -1,4 +1,4 @@
-#                                  HangMan Game
+# HangMan Game
 Members: David López & Paul Cumbal
 
 # Technologies Used
